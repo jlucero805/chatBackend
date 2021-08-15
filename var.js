@@ -84,7 +84,7 @@ const poolDetails = {
 	host: 'localhost',
 	database: 'postgres',
 	password: 'password',
-	port: 5433
+	port: 5432
 }
 
 const vars = {

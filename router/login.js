@@ -4,6 +4,22 @@ const vars = require('../var');
 const Pool = require('pg').Pool;
 const pool = new Pool(vars.poolDetails);
 
+loginRouter.get('/onlyUseToInitializeDatabase', (req, response) => {
+	pool.query(vars.queries.user.create, (err, res) => {
+		pool.query(vars.queries.user.add("Jason"), (err, res) => {
+			pool.query(vars.queries.user.add("Sean"), (err, res) => {
+				pool.query(vars.queries.room.create, (err, res) => {
+					pool.query(vars.queries.friend.create, (err, res) => {
+						pool.query(vars.queries.message.create, (err, res) => {
+							
+						})
+					})
+				})
+			})
+		})
+	});
+})
+
 loginRouter.post('/login', (req, response) => {
 	pool.query(vars.queries.user.getAll, (err, res) => {
 		console.log(res.rows)
