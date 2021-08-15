@@ -33,20 +33,9 @@ loginRouter.post('/login', (req, response) => {
 });
 
 loginRouter.get('/do', (req, response) => {
-	pool.query(vars.queries.user.create, (err, res) => {
-		pool.query(vars.queries.user.add("Jason"), (err, res) => {
-			pool.query(vars.queries.user.add("Sean"), (err, res) => {
-				pool.query(vars.queries.room.create, (err, res) => {
-					pool.query(vars.queries.friend.create, (err, res) => {
-						pool.query(vars.queries.message.create, (err, res) => {
-							
-						})
-					})
-				})
-			})
-		})
+	pool.query(vars.queries.user.getAllDetails, (err, res) => {
+		response.json({response: res.rows}).status(200)
 	});
-	response.json({response: 'worked'}).status(200)
 })
 loginRouter.get('/do1', (req, response) => {
 	pool.query(
