@@ -40,7 +40,7 @@ io.on('connection', socket => {
 
 const loginRouter = require('./router/login');
 const userRouter = require('./router/user');
-app.use('/', loginRouter);
-app.use('/', userRouter);
+app.use('/chat-app', loginRouter);
+app.use('/chat-app', userRouter);
 
 server.listen(3030, () => { console.log('listening on port 3030')});
