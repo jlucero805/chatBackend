@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="style.css" rel="stylesheet">
+	<title>Test Chat</title>
+</head>
+<body>
+	<input id="username">
+	<div>
+		<input id="room">
+		<button style="min-height:1em;" onclick="joinHandler()"></button>
+	</div>
+	<div id="chat-box" class="border">
+		<div>
+			<input id="chat-input">
+			<button style="min-height:1em;" onclick="sendHandler()"></button>
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		const socket = io();
+
+		let username = document.getElementById('username'); 
+		let chatInput = document.getElementById("chat-input");
+		let room = document.getElementById('room');
+
+		const sendHandler = () => {
+			if (chatInput.value !== '') {
+				socket.emit('chat message', `${username.value}: ${chatInput.value}`, room.value);
+				chatInput.value = '';
+			}
+		}
+
+		const joinHandler = () => {
+			if (room.value !== '') {
+				socket.emit('create', room.value);
+			}
+		}
+
+		socket.on('chat message', msg => {
+			let chat = document.createElement('p');
+			chat.innerText = msg;
+			let chatBox = document.getElementById('chat-box');
+			chatBox.appendChild(chat);
+		});
+	</script>
+</body>
+</html>
