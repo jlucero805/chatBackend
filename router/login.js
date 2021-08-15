@@ -11,7 +11,7 @@ loginRouter.get('/onlyUseToInitializeDatabase', (req, response) => {
 				pool.query(vars.queries.room.create, (err, res) => {
 					pool.query(vars.queries.friend.create, (err, res) => {
 						pool.query(vars.queries.message.create, (err, res) => {
-							
+
 						})
 					})
 				})
@@ -33,12 +33,19 @@ loginRouter.post('/login', (req, response) => {
 });
 
 loginRouter.get('/do', (req, response) => {
-	pool.query(
-		vars.queries.friend.add(1, 2, "Juan", 2),
-		(err, res) => {
-		console.log(err, res)
-
-	})
+	pool.query(vars.queries.user.create, (err, res) => {
+		pool.query(vars.queries.user.add("Jason"), (err, res) => {
+			pool.query(vars.queries.user.add("Sean"), (err, res) => {
+				pool.query(vars.queries.room.create, (err, res) => {
+					pool.query(vars.queries.friend.create, (err, res) => {
+						pool.query(vars.queries.message.create, (err, res) => {
+							
+						})
+					})
+				})
+			})
+		})
+	});
 })
 loginRouter.get('/do1', (req, response) => {
 	pool.query(
