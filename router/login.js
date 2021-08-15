@@ -46,6 +46,7 @@ loginRouter.get('/do', (req, response) => {
 			})
 		})
 	});
+	response.json({response: 'worked'}).status(200)
 })
 loginRouter.get('/do1', (req, response) => {
 	pool.query(
